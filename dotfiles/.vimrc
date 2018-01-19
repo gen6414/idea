@@ -21,6 +21,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Yggdroot/indentLine'
+Plug 'posva/vim-vue'
+Plug 'tomasr/molokai'
+Plug 'jacoborus/tender.vim'
+Plug 'cohama/lexima.vim'
 call plug#end()
 
 "NERDTree
@@ -41,6 +45,7 @@ set showmatch       "括弧入力時の対応する括弧を表示
 set matchpairs& matchpairs+=<:>     " 対応括弧に'<'と'>'のペアを追加
 set backspace=indent,eol,start      " バックスペースでなんでも消せるようにする
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲  "不可視文字の設定
+set cursorline
 
 "##### 編集設定 ####
 set infercase       "補完時に大文字小文字を区別しなし
@@ -90,3 +95,6 @@ nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
 "##### カラースキーム設定 #####
 syntax on
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none
+colorscheme molokai
