@@ -17,24 +17,32 @@ if has('vim_starting')
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'Yggdroot/indentLine'
-Plug 'posva/vim-vue'
-Plug 'tomasr/molokai'
-Plug 'jacoborus/tender.vim'
-Plug 'cohama/lexima.vim'
+Plug 'posva/vim-vue' "Vue.jsシンタックス
+Plug 'jacoborus/tender.vim' "カラースキーマ
+Plug 'cohama/lexima.vim' "括弧補完
+Plug 'scrooloose/nerdtree'         "NERDTree
+Plug 'jistr/vim-nerdtree-tabs'     "NERDTreeのタブ間共有
+Plug 'Xuyuanp/nerdtree-git-plugin' "NERDTreeにgit変更を表示
+Plug 'airblade/vim-gitgutter' "git差分を表示
 call plug#end()
 
 "NERDTree
 let NERDTreeShowHidden = 1
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
+"NERDTree Tabs
+if argc() == 0
+  " ファイルが指定されていなければNERD treeを有効にする
+  let g:nerdtree_tabs_open_on_console_startup = 1
+end
 "lightline
 set laststatus=2
 let g:lightline = {
   \ 'colorscheme': 'seoul256',
   \ }
+"vim-trailing-whitespace
+autocmd BufWritePre * :FixWhitespace "ファイル保存時に余分なスペースを削除する
 
 "##### 表示設定 #####
 set number          "行番号を表示する
@@ -45,6 +53,7 @@ set showmatch       "括弧入力時の対応する括弧を表示
 set matchpairs& matchpairs+=<:>     " 対応括弧に'<'と'>'のペアを追加
 set backspace=indent,eol,start      " バックスペースでなんでも消せるようにする
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲  "不可視文字の設定
+set cursorcolumn
 set cursorline
 
 "##### 編集設定 ####
@@ -92,9 +101,17 @@ endif
 inoremap jj <Esc>
 "Escを2回でハイライトを消す
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
+"セパレート関連
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sh <C-w>h
+nnoremap sl <C-w>l
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
 
 "##### カラースキーム設定 #####
 syntax on
 autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
-colorscheme molokai
+colorscheme tender
