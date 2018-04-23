@@ -1,0 +1,66 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# カラースキーム
+[[plugins]]
+repo = 'nanotech/jellybeans.vim'
+
+# NERDTree
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  " 不可視ファイルの可視化
+  let NERDTreeShowHidden = 1
+  " ブックマーク表示
+  let g:NERDTreeShowBookmarks=1
+  " NERDTreeの開閉キーマップ
+  nnoremap <silent><C-e> :NERDTreeToggle<CR>
+'''
+
+# NERDTreeをTab間で共有
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+hook_add = '''
+if argc() == 0
+  " ファイルが指定されていなければNERD treeを有効にする
+  let g:nerdtree_tabs_open_on_console_startup = 1
+end
+'''
+
+# NERDTreeにGit変更を表示
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+# Git修正箇所を表示
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+# ステータスバー
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  set laststatus=2
+  let g:lightline = {
+  \ 'colorscheme': 'jellybeans',
+  \ }
+'''
+
+# インデントライン
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+  let g:indentLine_color_term = 236
+  let g:indentLine_color_gui = '#333333'
+'''
+
+# snippets
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+# カーソル位置でファイルタイプを設定
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+

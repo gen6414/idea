@@ -17,15 +17,15 @@ if has('vim_starting')
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'itchyny/lightline.vim'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'posva/vim-vue' "Vue.jsシンタックス
-Plug 'jacoborus/tender.vim' "カラースキーマ
-Plug 'cohama/lexima.vim' "括弧補完
-Plug 'scrooloose/nerdtree'         "NERDTree
-Plug 'jistr/vim-nerdtree-tabs'     "NERDTreeのタブ間共有
-Plug 'Xuyuanp/nerdtree-git-plugin' "NERDTreeにgit変更を表示
-Plug 'airblade/vim-gitgutter' "git差分を表示
+Plug 'itchyny/lightline.vim'           "ステータスバー
+Plug 'bronson/vim-trailing-whitespace' "語尾空白削除
+Plug 'posva/vim-vue'                   "Vue.jsシンタックス
+Plug 'jacoborus/tender.vim'            "カラースキーマ
+Plug 'cohama/lexima.vim'               "括弧補完
+Plug 'scrooloose/nerdtree'             "NERDTree
+Plug 'jistr/vim-nerdtree-tabs'         "NERDTreeのタブ間共有
+Plug 'Xuyuanp/nerdtree-git-plugin'     "NERDTreeにgit変更を表示
+Plug 'airblade/vim-gitgutter'          "git差分を表示
 call plug#end()
 
 "NERDTree

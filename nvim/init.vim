@@ -16,95 +16,57 @@ set ambiwidth=double
 
 
 " ***********************
-"    プラグイン設定
+"    dein設定
 " ***********************
-if has('vim_starting')
-  set rtp+=~/.config/nvim/plugged/vim-plug
-  if !isdirectory(expand('~/.config/nvim/plugged/vim-plug'))
-    echo 'Install vim-plug...'
-    call system('git clone https://github.com/junegunn/vim-plug.git ~/.config/nvim/plugged/vim-plug/autoload')
+if &compatible
+  set nocompatible
+endif
+" dein.vimインストール時に指定したディレクトリをセット
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vimの実体があるディレクトリをセット
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vimが存在していない場合はgithubからclone
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-call plug#begin('~/.config/nvim/plugged')
-" ステータスバー
-Plug 'itchyny/lightline.vim'
-" 語尾の空白自動削除
-Plug 'bronson/vim-trailing-whitespace'
-" カラースキーマ
-Plug 'jacoborus/tender.vim'
-Plug 'beigebrucewayne/Turtles'
-" 括弧s自動補完
-Plug 'cohama/lexima.vim'
-" NERDTree
-Plug 'scrooloose/nerdtree'
-" NERDTreeのタブ間共有
-Plug 'jistr/vim-nerdtree-tabs'
-" NERDTreeにgit変更を表示
-Plug 'Xuyuanp/nerdtree-git-plugin'
-" Git修正箇所を表示
-Plug 'airblade/vim-gitgutter'
-" インデントライン
-Plug 'Yggdroot/indentLine'
-" vueシンタックス
-Plug 'posva/vim-vue'
-" 自動補完
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'wokalski/autocomplete-flow'
-endif
-call plug#end()
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" NERDTree
-let NERDTreeShowHidden = 1
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-" NERDTree Tabs
-if argc() == 0
-  " ファイルが指定されていなければNERD treeを有効にする
-  let g:nerdtree_tabs_open_on_console_startup = 1
-end
-" lightline
-set laststatus=2
-let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
-  \ }
-" vim-trailing-whitespace
-autocmd BufWritePre * :FixWhitespace "ファイル保存時に余分なスペースを削除する
-" deoplete
-let g:deoplete#enable_at_startup = 1
-function! DeopleteConfig()
-  call deoplete#custom#set('_', 'converters', ['converter_auto_paren', 'converter_remove_overlap'])
-  call deoplete#custom#set('_', 'min_pattern_length', 1)
-  call deoplete#custom#set('buffer', 'rank', 100)
-  call deoplete#custom#set('go', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#set('go', 'sorters', [])
-  call deoplete#custom#set('jedi', 'disabled_syntaxes', ['Comment'])
-  call deoplete#custom#set('jedi', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#set('neosnippet', 'disabled_syntaxes', ['goComment'])"
-  call deoplete#custom#set('ternjs', 'rank', 0)
-  call deoplete#custom#set('vim', 'disabled_syntaxes', ['Comment'])
-endfunction
-" indentLine
-let g:indentLine_color_term = 236
-let g:indentLine_color_gui = '#333333'
+  " dein.toml, dein_layz.tomlファイルのディレクトリをセット
+  let s:toml_dir = expand('~/.config/nvim')
+
+  " 起動時に読み込むプラグイン群
+  call dein#load_toml(s:toml_dir . '/dein.toml', {'lazy': 0})
+
+  " 遅延読み込みしたいプラグイン群
+  call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
 
 
 " ***********************
 "    カラー設定
 " ***********************
 syntax on
-colorscheme turtles
+colorscheme jellybeans
 
 
 " ***********************
 "    表示設定
 " ***********************
 " 行番号の表示
-set number
+"set number
 "不可視文字の表示
 set list
 " 不可視文字の設定
@@ -120,10 +82,11 @@ set matchpairs& matchpairs+=<:>
 " バックスペースで消せる文字追加
 set backspace=indent,eol,start
 " カレント行の協調
-set cursorline
+"set cursorline
 " TrueColorを有効
 set termguicolors
-
+" Vueファイルタイプ設定
+autocmd BufNewFile,BufRead *.vue set filetype=html
 
 " ***********************
 "    編集設定
@@ -187,7 +150,7 @@ inoremap jj <Esc>
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 " 画面分割
 nnoremap <silent> ss :split<CR>
-nnoremap <silent> sv :vsplit<CR>
+nnoremap <silent> si :vsplit<CR>
 " 画面分割移動
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
@@ -199,14 +162,12 @@ nnoremap wk <C-w>K
 nnoremap wh <C-w>H
 nnoremap wl <C-w>L
 " 分割画面の高さと幅の増減
-noremap xl <C-w>>
-noremap xh <C-w><
-noremap xk <C-w>+
-noremap xj <C-w>-
+noremap <C-w>l <C-w>>
+noremap <C-w>h <C-w><
+noremap <C-w>k <C-w>+
+noremap <C-w>j <C-w>-
 " タブ
 noremap <silent> tt :tabnew<CR>
 noremap tn gt
 noremap tp gT
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
