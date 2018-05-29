@@ -21,6 +21,7 @@ set ambiwidth=double
 if &compatible
   set nocompatible
 endif
+
 " dein.vimインストール時に指定したディレクトリをセット
 let s:dein_dir = expand('~/.cache/dein')
 " dein.vimの実体があるディレクトリをセット
@@ -56,17 +57,10 @@ endif
 
 
 " ***********************
-"    カラー設定
-" ***********************
-syntax on
-colorscheme jellybeans
-
-
-" ***********************
 "    表示設定
 " ***********************
 " 行番号の表示
-"set number
+set number
 "不可視文字の表示
 set list
 " 不可視文字の設定
@@ -82,11 +76,10 @@ set matchpairs& matchpairs+=<:>
 " バックスペースで消せる文字追加
 set backspace=indent,eol,start
 " カレント行の協調
-"set cursorline
-" TrueColorを有効
-set termguicolors
-" Vueファイルタイプ設定
-autocmd BufNewFile,BufRead *.vue set filetype=html
+set cursorline
+" シンタックスカラー
+syntax on
+
 
 " ***********************
 "    編集設定
@@ -103,7 +96,6 @@ set nobackup
 set noswapfile
 "外部でファイルに変更がされた場合は読みなおす
 set autoread
-
 
 
 " ***********************
@@ -169,5 +161,5 @@ noremap <C-w>j <C-w>-
 " タブ
 noremap <silent> tt :tabnew<CR>
 noremap tn gt
-noremap tp gT
+noremap tp gu
 

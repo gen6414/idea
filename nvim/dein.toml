@@ -3,7 +3,12 @@ repo = 'Shougo/dein.vim'
 
 # カラースキーム
 [[plugins]]
-repo = 'nanotech/jellybeans.vim'
+repo = 'tyrannicaltoucan/vim-deep-space'
+hook_add = '''
+  set background=dark
+  set termguicolors
+  colorscheme deep-space
+'''
 
 # NERDTree
 [[plugins]]
@@ -31,10 +36,6 @@ end
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
 
-# Git修正箇所を表示
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-
 # ステータスバー
 [[plugins]]
 repo = 'itchyny/lightline.vim'
@@ -56,11 +57,4 @@ hook_add = '''
 # snippets
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-
-# カーソル位置でファイルタイプを設定
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
-
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
 
