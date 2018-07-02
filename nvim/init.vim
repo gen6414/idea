@@ -94,8 +94,10 @@ set hidden
 set nobackup
 " ファイル編集中にスワップファイルを作らない
 set noswapfile
-"外部でファイルに変更がされた場合は読みなおす
+" 外部でファイルに変更がされた場合は読みなおす
 set autoread
+" clip board
+set clipboard+=unnamedplus
 
 
 " ***********************
