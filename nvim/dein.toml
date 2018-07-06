@@ -3,11 +3,10 @@ repo = 'Shougo/dein.vim'
 
 # カラースキーム
 [[plugins]]
-repo = 'tyrannicaltoucan/vim-deep-space'
+repo = 'aradunovic/perun.vim'
 hook_add = '''
-  set background=dark
   set termguicolors
-  colorscheme deep-space
+  colorscheme perun
 '''
 
 # NERDTree
