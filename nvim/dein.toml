@@ -50,7 +50,7 @@ hook_add = '''
 repo = 'Yggdroot/indentLine'
 hook_add = '''
   let g:indentLine_color_term = 236
-  let g:indentLine_color_gui = '#333333'
+  let g:indentLine_color_gui = '#444444'
 '''
 
 # snippets
