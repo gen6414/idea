@@ -164,4 +164,8 @@ noremap <C-w>j <C-w>-
 noremap <silent> tt :tabnew<CR>
 noremap tn gt
 noremap tp gu
-
+" vimgrep
+nnoremap [q :cprevious<CR>   " 前へ
+nnoremap ]q :cnext<CR>       " 次へ
+nnoremap [Q :<C-u>cfirst<CR> " 最初へ
+nnoremap ]Q :<C-u>clast<CR>  " 最後へ
